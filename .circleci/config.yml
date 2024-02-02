@@ -1,38 +1,12 @@
 version: 2.1
-
 jobs:
-  test:
-    docker:
-      - image: cimg/aws:2023.12
-    steps:
-      - run:
-          name: Run Test
-          command: echo "Running tests..."
-
   build:
     docker:
-      - image: cimg/aws:2023.12
+      - image: cimg/base:current
+    resource_class: mohammedashiqu/myapp
     steps:
-      - run:
-          name: Build Project
-          command: echo "Building project..."
-
-  deploy:
-    docker:
-      - image: cimg/aws:2023.12
-    steps:
-      - run:
-          name: Deploy Project
-          command: echo "Deploying project..."
-
+      - run: echo "Hi I'm on a Container Runner!"
 workflows:
-  version: 2
-  build_and_deploy:
+  build-workflow:
     jobs:
-      - test
-      - build:
-          requires:
-            - test
-      - deploy:
-          requires:
-            - build
+      - build
