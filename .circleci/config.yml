@@ -11,9 +11,16 @@ jobs:
       - image: cimg/base:current
     resource_class: mohammedashiqu/myapp
     steps:
-      - run: echo "Hi I'm on a Container Runner!"
+      - run: echo "Hi push"
+  deploy:
+    docker:
+      - image: cimg/base:current
+    resource_class: mohammedashiqu/myapp
+    steps:
+      - run: echo "Hi deploy"
 workflows:
   build-workflow:
     jobs:
       - build
       - push
+      - deploy
