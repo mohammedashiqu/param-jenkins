@@ -1,46 +1,12 @@
 version: 2.1
-
 jobs:
-  test:
+  build:
     docker:
       - image: cimg/base:current
-    resource_class: mohammedashiqu/test-class
+    resource_class: mohammedashiqu/myapp
     steps:
-      - run:
-          name: Run Tests
-          command: |
-            # Add your test commands here
-            # For example: npm test, pytest, mvn test, etc.
-
-  push:
-    docker:
-      - image: cimg/base:current
-    resource_class: mohammedashiqu/push-class
-    steps:
-      - run:
-          name: Push to Version Control
-          command: |
-            # Add your version control commands here
-            # For example: git push origin main
-
-  deploy:
-    docker:
-      - image: cimg/base:current
-    resource_class: mohammedashiqu/deploy-class
-    steps:
-      - run:
-          name: Deploy to Environment
-          command: |
-            # Add your deployment commands here
-            # For example: deploy to staging/production environment
-
+      - run: echo "Hi I'm on a Container Runner!"
 workflows:
   build-workflow:
     jobs:
-      - test
-      - push:
-          requires:
-            - test
-      - deploy:
-          requires:
-            - push
+      - build
