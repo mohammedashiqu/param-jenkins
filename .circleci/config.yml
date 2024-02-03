@@ -1,12 +1,32 @@
 version: 2.1
 jobs:
+  clone:
+    docker:
+      - image: cimg/base:current
+    resource_class: mohammedashiqu/myapp
+    steps:
+      - run: echo "clone"
   build:
     docker:
       - image: cimg/base:current
     resource_class: mohammedashiqu/myapp
     steps:
-      - run: echo "Hi I'm on a Container Runner!"
+      - run: echo "building"
+  push:
+    docker:
+      - image: cimg/base:current
+    resource_class: mohammedashiqu/myapp
+    steps:
+      - run: echo "push"
 workflows:
   build-workflow:
     jobs:
-      - build
+      - test
+      - build:
+        requires:
+          - test
+      - push:
+        requires:
+          - build
+      
+      
