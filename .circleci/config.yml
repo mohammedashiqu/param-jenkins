@@ -22,5 +22,9 @@ workflows:
   build-workflow:
     jobs:
       - build
-      - push
+      - push:
+          requires:
+            - build
       - deploy
+          requires:
+            - push
